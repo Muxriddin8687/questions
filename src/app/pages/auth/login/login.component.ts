@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
-import { FormBuilder, Validators } from '@angular/forms';
+import { ButtonDirective, ButtonModule } from 'primeng/button';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import { AuthService } from '@core/services/auth.service';
@@ -31,7 +31,7 @@ import { catchError, tap } from 'rxjs';
         }
     `],
     standalone: true,
-    imports: [InputTextModule, PasswordModule, ButtonModule]
+    imports: [InputTextModule, PasswordModule, ButtonDirective, ReactiveFormsModule]
 })
 export class LoginComponent extends BaseComponent {
     private _authService = inject(AuthService);

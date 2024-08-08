@@ -25,8 +25,8 @@ import { environment } from 'src/environments/environment';
   styleUrl: './subjects.component.scss'
 })
 export class SubjectsComponent {
-  private _http = inject(HttpClient);
   private _messageService = inject(MessageService);
+  private _http = inject(HttpClient);
   private _fb = inject(FormBuilder);
   private api = environment.api;
 
@@ -37,7 +37,7 @@ export class SubjectsComponent {
   display: boolean = false;
 
   save() {
-    this._http.post(this.api + '/subjects', this.form.value).subscribe({
+    this._http.post(this.api + 'subjects', this.form.value).subscribe({
       next: () => {
         this.display = false;
         this.form.reset();

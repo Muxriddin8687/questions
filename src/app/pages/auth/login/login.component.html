@@ -40,24 +40,38 @@
                     <span class="text-600 font-medium">Kirish</span>
                 </div>
 
-                <div class="w-full md:w-10 mx-auto">
-                    <label class="block text-900 text-xl font-medium mb-2">
-                        Login
-                    </label>
-                    <input
-                        type="text"
-                        pInputText
-                        class="w-full mb-3"
-                        style="padding: 1rem"
-                    />
+                <form [formGroup]="form" (ngSubmit)="submit()">
+                    <div class="w-full md:w-10 mx-auto">
+                        <label class="block text-900 text-xl font-medium mb-2">
+                            Login
+                        </label>
+                        <input
+                            type="text"
+                            pInputText
+                            class="w-full mb-3"
+                            style="padding: 1rem"
+                            formControlName="username"
+                        />
 
-                    <label class="block text-900 font-medium text-xl mb-2">
-                        Parol
-                    </label>
+                        <label class="block text-900 font-medium text-xl mb-2">
+                            Parol
+                        </label>
 
-                    <p-password styleClass="w-full mb-3" />
-                    <p-button label="" class="w-full p-3 text-xl" />
-                </div>
+                        <input
+                            type="password"
+                            pInputText
+                            class="w-full mb-3"
+                            style="padding: 1rem"
+                            formControlName="password"
+                        />
+                        <!-- <p-password styleClass="w-full mb-3" /> -->
+                        <button
+                            pButton
+                            label="Kirish"
+                            class="w-full p-3 text-xl"
+                        ></button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
