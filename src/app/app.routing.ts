@@ -1,7 +1,8 @@
 import { Routes } from "@angular/router";
-import { authRoutes } from "./demo/components/auth/auth.routing";
 import { pagesRoutes } from "./demo/components/pages/pages.routing";
 import { uikitRoutes } from "./demo/components/uikit/uikit.routing";
+import { authRoutes } from "@pages/auth/auth.routing";
+import { authGuard } from "@core/guards/auth.guard";
 
 export const appRoutes: Routes = [
     {
@@ -10,14 +11,17 @@ export const appRoutes: Routes = [
         children: [
             {
                 path: 'subjects',
+                canActivate: [authGuard],
                 loadComponent: () => import('./pages/subjects/subjects.component').then(c => c.SubjectsComponent)
             },
             {
                 path: 'topics',
+                canActivate: [authGuard],
                 loadComponent: () => import('./pages/topics/topics.component').then(c => c.TopicsComponent)
             },
             {
                 path: 'questions',
+                canActivate: [authGuard],
                 loadComponent: () => import('./pages/questions/questions.component').then(c => c.QuestionsComponent)
             },
             {

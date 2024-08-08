@@ -6,7 +6,6 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { RippleModule } from 'primeng/ripple';
 import { ToastModule } from 'primeng/toast';
 import { environment } from 'src/environments/environment';
 
@@ -17,7 +16,6 @@ import { environment } from 'src/environments/environment';
   imports: [
     ButtonModule,
     ToastModule,
-    RippleModule,
     DialogModule,
     ReactiveFormsModule,
     InputTextModule,
