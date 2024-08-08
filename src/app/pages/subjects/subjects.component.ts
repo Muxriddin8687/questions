@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { RippleModule } from 'primeng/ripple';
 import { ToastModule } from 'primeng/toast';
 import { environment } from 'src/environments/environment';
 
@@ -13,11 +14,19 @@ import { environment } from 'src/environments/environment';
   selector: 'app-subjects',
   standalone: true,
   providers: [MessageService],
-  imports: [ButtonModule, ToastModule, DialogModule, ReactiveFormsModule, InputTextModule, InputTextareaModule],
+  imports: [
+    ButtonModule,
+    ToastModule,
+    RippleModule,
+    DialogModule,
+    ReactiveFormsModule,
+    InputTextModule,
+    InputTextareaModule
+  ],
   templateUrl: './subjects.component.html',
   styleUrl: './subjects.component.scss'
 })
-export class SubjectsComponent implements AfterViewInit {
+export class SubjectsComponent {
   private _http = inject(HttpClient);
   private _messageService = inject(MessageService);
   private _fb = inject(FormBuilder);
@@ -28,12 +37,6 @@ export class SubjectsComponent implements AfterViewInit {
     description: ['']
   })
   display: boolean = false;
-
-  ngAfterViewInit() {
-    console.log('aer');
-
-    this._messageService.add({ severity: 'info', summary: 'Info Message', detail: 'PrimeNG rocks' });
-  }
 
   save() {
     this._http.post(this.api + '/subjects', this.form.value).subscribe({
