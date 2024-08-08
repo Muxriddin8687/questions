@@ -9,6 +9,18 @@ export const appRoutes: Routes = [
         loadComponent: () => import('./layout/app.layout.component').then(c => c.AppLayoutComponent),
         children: [
             {
+                path: 'subjects',
+                loadComponent: () => import('./pages/subjects/subjects.component').then(c => c.SubjectsComponent)
+            },
+            {
+                path: 'topics',
+                loadComponent: () => import('./pages/topics/topics.component').then(c => c.TopicsComponent)
+            },
+            {
+                path: 'questions',
+                loadComponent: () => import('./pages/questions/questions.component').then(c => c.QuestionsComponent)
+            },
+            {
                 path: '',
                 loadComponent: () => import('./demo/components/dashboard/dashboard.component').then(c => c.DashboardComponent)
             },

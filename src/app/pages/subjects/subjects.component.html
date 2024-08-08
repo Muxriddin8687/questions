@@ -1,0 +1,25 @@
+<div class="flex flex-wrap align-items-center justify-content-between">
+    <h4 class="mb-0">Fanlar</h4>
+    <p-button label="Yangi fan" icon="pi pi-plus" (onClick)="display=true"></p-button>
+</div>
+<hr>
+<p-toast [baseZIndex]="99999"></p-toast>
+
+
+
+<p-dialog header="Yangi fan" [(visible)]="display" [modal]="true" showEffect="fade" [style]="{width: '400px', minWidth: '300px'}" [breakpoints]="{'960px': '75vw'}">
+    <form [formGroup]="form">
+
+        <span class="p-float-label w-full mt-2 mb-4">
+            <input class="w-full" formControlName="title" id="float-input" type="text" pInputText>
+            <label for="float-input">Nomi</label>
+        </span>
+
+        <textarea placeholder="Izoh" formControlName="description" class="w-full" rows="5" pInputTextarea></textarea>
+
+    </form>
+    <ng-template pTemplate="footer">
+        <p-button (click)="display=false" severity="warning" icon="pi pi-cancel" label="Bekor qilish" pRipple></p-button>
+        <p-button (click)="save()" [disabled]="form.invalid" class="me-0" severity="success" icon="pi pi-check" label="Saqlash" pRipple></p-button>
+    </ng-template>
+</p-dialog>

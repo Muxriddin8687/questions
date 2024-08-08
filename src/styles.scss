@@ -14,3 +14,12 @@ $gutter: 1rem; //for primeflex grid system
 /* Demos */
 @import "assets/demo/styles/flags/flags.css";
 @import "assets/demo/styles/badges.scss";
+
+
+
+.p-dialog .p-dialog-header .p-dialog-header-icon {
+    width: 14px !important;
+    height: 14px !important;
+    min-width: 14px;
+    padding: 0 !important;
+}
