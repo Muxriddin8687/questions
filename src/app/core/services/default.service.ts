@@ -1,4 +1,4 @@
-import { inject, Injectable } from "@angular/core";
+import { Inject, inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Subject, tap } from "rxjs";
 import { environment } from "src/environments/environment";
@@ -11,6 +11,10 @@ export class DefaultService<T, Ti, Tu> {
     _http = inject(HttpClient);
     _api = environment.api;
     reloadDataAction$$ = new Subject<boolean>();
+
+    constructor(@Inject("url") public url: string) {
+        this._api += this.url;
+    }
 
     getAll<T>() {
         return this._http.get<T>(this._api);

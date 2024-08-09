@@ -5,7 +5,7 @@
 
 <hr />
 
-<p-toast [baseZIndex]="99" />
+<!-- <p-toast></p-toast> -->
 
 <p-dialog
     header="Yangi fan"
@@ -34,21 +34,21 @@
             rows="5"
             pInputTextarea
         ></textarea>
-    </form>
 
-    <ng-template pTemplate="footer">
-        <p-button
-            (click)="display = false"
-            severity="warning"
-            icon="pi pi-cancel"
-            label="Bekor qilish"
-        />
-        <p-button
-            (click)="save()"
-            [disabled]="form.invalid"
-            class="me-0"
-            icon="pi pi-check"
-            label="Saqlash"
-        />
-    </ng-template>
+        <div class="form-footer">
+            <p-button
+                (click)="display = false"
+                severity="warning"
+                icon="pi pi-cancel"
+                label="Bekor qilish"
+            />
+            <p-button
+                (click)="save()"
+                [disabled]="form.invalid"
+                class="me-0"
+                icon="pi pi-check"
+                label="Saqlash"
+            />
+        </div>
+    </form>
 </p-dialog>

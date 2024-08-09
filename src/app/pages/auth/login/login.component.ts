@@ -1,41 +1,23 @@
 import { Component, inject } from '@angular/core';
-import { ButtonDirective, ButtonModule } from 'primeng/button';
+import { ButtonDirective } from 'primeng/button';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import { AuthService } from '@core/services/auth.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { BaseComponent } from '@core/components/default.component';
-import { catchError, tap } from 'rxjs';
+import { BaseComponent } from '@core/components/base.component';
+import { catchError, of, tap } from 'rxjs';
 
 @UntilDestroy()
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-    styles: [`
-        :host ::ng-deep .p-password input {
-            width: 100%;
-            padding:1rem;
-        }
-
-        :host ::ng-deep .pi-eye{
-            transform:scale(1.6);
-            margin-right: 1rem;
-            color: var(--primary-color) !important;
-        }
-
-        :host ::ng-deep .pi-eye-slash{
-            transform:scale(1.6);
-            margin-right: 1rem;
-            color: var(--primary-color) !important;
-        }
-    `],
     standalone: true,
     imports: [InputTextModule, PasswordModule, ButtonDirective, ReactiveFormsModule]
 })
 export class LoginComponent extends BaseComponent {
     private _authService = inject(AuthService);
-    private _fb = inject(FormBuilder);
+    isError = false;
 
     form = this._fb.group({
         username: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
@@ -48,13 +30,16 @@ export class LoginComponent extends BaseComponent {
                 .login(this.form.value)
                 .pipe(
                     untilDestroyed(this),
-                    catchError((error) => {
-                        this.form.setErrors({ invalidCredentials: true });
-                        return error;
+                    catchError(() => {
+                        this.isError = true;
+                        setTimeout(() => this.isError = false, 3000);
+                        return of(null);
                     }),
-                    tap(() => {
-                        this._authService.isAuthenticated() ? this._router.navigate(['/subjects']) : null;
-                        this.form.reset();
+                    tap((res) => {
+                        if (res.token) {
+                            this._router.navigate(['/subjects']);
+                            this.form.reset();
+                        }
                     })
                 )
                 .subscribe();
