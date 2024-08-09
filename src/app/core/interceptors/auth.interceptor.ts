@@ -6,17 +6,17 @@ import { catchError, switchMap, throwError } from 'rxjs';
 export const AuthInterceptor: HttpInterceptorFn = (req, next) => {
     const _authService = inject(AuthService);
     const accessToken = _authService.getAccessToken();
-    let authReq = req;
+    let newReq = req;
 
     if (accessToken) {
-        authReq = req.clone({
+        newReq = req.clone({
             headers: req.headers.set('Authorization', `Bearer ${accessToken}`)
         });
     }
 
-    return next(authReq).pipe(
+    return next(newReq).pipe(
         catchError(err => {
-            if (err.status === 401 && !authReq.url.endsWith('/login') && !authReq.url.endsWith('/refreshtoken')) {
+            if (err.status === 401 && !newReq.url.endsWith('/login') && !newReq.url.endsWith('/refreshtoken')) {
                 return _authService.refreshToken().pipe(
                     switchMap(() => {
                         const newAuthToken = _authService.getAccessToken();

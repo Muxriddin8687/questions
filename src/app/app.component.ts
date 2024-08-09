@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     standalone: true,
-    imports: [RouterOutlet],
+    imports: [RouterOutlet, ToastModule, ConfirmDialogModule],
 })
 export class AppComponent implements OnInit {
 

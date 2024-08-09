@@ -1,54 +1,97 @@
 <div class="flex flex-wrap align-items-center justify-content-between">
     <h4 class="mb-0">Fanlar</h4>
-    <p-button label="Yangi fan" icon="pi pi-plus" (onClick)="display = true" />
+    <p-button (click)="openAddModal()" icon="pi pi-plus" label="Yangi fan" />
 </div>
 
 <hr />
 
-<!-- <p-toast></p-toast> -->
-
-<p-dialog
-    header="Yangi fan"
-    [(visible)]="display"
-    [modal]="true"
-    showEffect="fade"
-    [style]="{ width: '400px', minWidth: '300px' }"
-    [breakpoints]="{ '960px': '75vw' }"
+<p-table
+    [value]="_subjectService.data().content"
+    styleClass="p-datatable-gridlines p-datatable-striped"
+    [tableStyle]="{ 'min-width': '500px', height: '' }"
+    [scrollable]="true"
+    scrollHeight="400px"
 >
-    <form [formGroup]="form">
-        <span class="p-float-label w-full mt-2 mb-4">
-            <input
-                class="w-full"
-                formControlName="title"
-                id="float-input"
-                type="text"
-                pInputText
-            />
-            <label for="float-input">Nomi</label>
-        </span>
+    <ng-template pTemplate="header">
+        <tr>
+            <th width="60px">№</th>
+            <th>Nomi</th>
+            <th>Izoh</th>
+            <th width="110px"></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
+        <tr>
+            <td>{{ rowIndex + 1 }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.description }}</td>
+            <td>
+                <button
+                    pButton
+                    pRipple
+                    type="button"
+                    icon="pi pi-pencil"
+                    (click)="update(item.id)"
+                    class="p-button-rounded p-button-warning p-button-outlined mr-2"
+                ></button>
+                <button
+                    pButton
+                    pRipple
+                    type="button"
+                    icon="pi pi-times"
+                    (click)="deleteDialog($event, item.id)"
+                    class="p-button-rounded p-button-danger p-button-outlined"
+                ></button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="4">Ma'lumot yo'q</td>
+        </tr>
+    </ng-template>
+</p-table>
 
-        <textarea
-            placeholder="Izoh"
-            formControlName="description"
-            class="w-full"
-            rows="5"
-            pInputTextarea
-        ></textarea>
-
-        <div class="form-footer">
-            <p-button
-                (click)="display = false"
-                severity="warning"
-                icon="pi pi-cancel"
-                label="Bekor qilish"
-            />
-            <p-button
-                (click)="save()"
-                [disabled]="form.invalid"
-                class="me-0"
-                icon="pi pi-check"
-                label="Saqlash"
-            />
-        </div>
-    </form>
-</p-dialog>
+<!-- 
+<p-table
+    [value]="_subjectService.data()"
+    styleClass="p-datatable-gridlines p-datatable-striped"
+    responsiveLayout="scroll"
+    [breakpoint]="'960px'"
+    [paginator]="true"
+    [first]="0"
+    [rows]="15"
+    currentPageReportTemplate="{totalRecords} tadan {first} dan {last} gacha"
+    (onPage)="pageChange($event)"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[15, 20, 50]"
+    (sortFunction)="customSort($event)"
+    [customSort]="true"
+    (onRowSelect)="onRowSelect($event)"
+    selectionMode="single"
+    [(selection)]="selectedRow"
+    dataKey="code"
+>
+    <ng-template pTemplate="header">
+        <tr>
+            <th width="20px">№</th>
+            <th pSortableColumn="name">Nomi<p-sortIcon field="name" /></th>
+            <th>Izoh</th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
+        <tr [pSelectableRow]="selectedRow">
+            <td width="20px">{{ rowIndex + 1 }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.description }}</td>
+            <td>qwerty</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="4">Ma'lumot yo'q</td>
+            </tr>
+        </ng-template>
+</p-table>
+-->

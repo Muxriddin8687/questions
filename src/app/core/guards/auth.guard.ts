@@ -4,12 +4,9 @@ import { AuthService } from '@core/services/auth.service';
 
 export const authGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
-  const router = inject(Router);
 
   if (authService.isAuthenticated()) {
     return true;
   }
-
-  router.createUrlTree(['/login']);
   return false;
 };

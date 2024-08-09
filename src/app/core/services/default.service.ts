@@ -1,6 +1,6 @@
-import { Inject, inject, Injectable } from "@angular/core";
+import { Inject, inject, Injectable, signal } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Subject, tap } from "rxjs";
+import { Subject, Subscription, tap } from "rxjs";
 import { environment } from "src/environments/environment";
 import removeEmptyProperties from "@shared/utils/removeEmptyProperties.util";
 
@@ -10,24 +10,34 @@ import removeEmptyProperties from "@shared/utils/removeEmptyProperties.util";
 export class DefaultService<T, Ti, Tu> {
     _http = inject(HttpClient);
     _api = environment.api;
+
     reloadDataAction$$ = new Subject<boolean>();
+    subscription = new Subscription();
+    data = signal<any>([]);
 
     constructor(@Inject("url") public url: string) {
         this._api += this.url;
     }
 
-    getAll<T>() {
-        return this._http.get<T>(this._api);
+    loadData() {
+        this.subscription = this.getAll().subscribe((data: any) => {
+            this.data.set(data);
+            this.subscription.unsubscribe();
+        });
     }
 
-    getOne<Tu>(id: number, params?: string) {
+    getAll<T>() {
+        return this._http.get<T[]>(this._api).pipe(tap((res: any) => this.data.set(res)));
+    }
+
+    getOne<Tu>(id: number, params: string = '') {
         return this._http.get<Tu>(this._api + "/" + id + "?" + params);
     }
 
     getByFilter<T>(filter: Tu | any) {
         let data = removeEmptyProperties(filter);
         data = new URLSearchParams(data).toString();
-        return this._http.get<T>(this._api + "?" + data);
+        return this._http.get<T>(this._api + "?" + data).pipe(tap((res: any) => this.data.set(res)));
     }
 
     insert(form: Ti) {
@@ -56,5 +66,6 @@ export class DefaultService<T, Ti, Tu> {
 
     reloadData() {
         this.reloadDataAction$$.next(true);
+        this.loadData();
     }
 }

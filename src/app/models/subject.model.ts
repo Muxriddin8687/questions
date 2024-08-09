@@ -1,4 +1,4 @@
 export interface ISubject {
-    title: string;
-    description?: string;
+    title: string | null | undefined;
+    description: string | null | undefined;
 }

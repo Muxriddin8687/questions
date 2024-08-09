@@ -47,12 +47,8 @@ export class AuthService {
             this.api + 'auth/refreshtoken',
             { refreshToken: this.getRefreshToken() }).pipe(
                 tap((response: any) => {
-                    localStorage.setItem(this.tokenKey, response.token);
+                    localStorage.setItem(this.tokenKey, response.accessToken);
                     localStorage.setItem(this.refreshKey, response.refreshToken);
-                }),
-                catchError(error => {
-                    this.logout();
-                    return throwError(() => error);
                 })
             );
     }

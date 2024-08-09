@@ -12,8 +12,8 @@ import { IconService } from './demo/service/icon.service';
 import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
 import { ProductService } from './demo/service/product.service';
-import { MessageService } from 'primeng/api';
-import { DialogService } from 'primeng/dynamicdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -30,6 +30,6 @@ export const appConfig: ApplicationConfig = {
         provideAnimations(),
         provideHttpClient(withInterceptors([AuthInterceptor])),
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService, MessageService, DialogService
+        PhotoService, ProductService, MessageService, DialogService, DynamicDialogRef, DynamicDialogConfig, ConfirmationService
     ]
 };
