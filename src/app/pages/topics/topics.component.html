@@ -1,1 +1,62 @@
-<p>topics works!</p>
+<div class="flex flex-wrap align-items-center justify-content-between">
+  <h4 class="mb-0">Mavzular</h4>
+  <p-button (click)="openAddModal()" icon="pi pi-plus" label="Yangi mavzu" />
+</div>
+
+<hr />
+
+<p-table
+  [value]="_topicService.data().content"
+  styleClass="p-datatable-gridlines p-datatable-striped"
+  [tableStyle]="{ 'min-width': '500px' }"
+  [paginator]="true"
+  [first]="0"
+  [rows]="15"
+  currentPageReportTemplate="{totalRecords} tadan {first} dan {last} gacha"
+  (onPage)="pageChange($event)"
+  [showCurrentPageReport]="true"
+  [rowsPerPageOptions]="[15, 20, 50]"
+  (sortFunction)="customSort($event)"
+  [customSort]="true"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="id" width="60px">№<p-sortIcon field="id" /></th>
+      <th pSortableColumn="title">Nomi<p-sortIcon field="title" /></th>
+      <th pSortableColumn="subjectId">Fan<p-sortIcon field="subjectId" /></th>
+      <th>Izoh</th>
+      <th width="110px"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
+    <tr>
+      <td>{{ rowIndex + 1 }}</td>
+      <td>{{ item.title }}</td>
+      <td>{{ item.subject?.title }}</td>
+      <td>{{ item.description }}</td>
+      <td>
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-pencil"
+          (click)="update(item.id)"
+          class="p-button-rounded p-button-warning p-button-outlined mr-2"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-times"
+          (click)="deleteDialog($event, item.id)"
+          class="p-button-rounded p-button-danger p-button-outlined"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="4">Ma'lumot yo'q</td>
+    </tr>
+  </ng-template>
+</p-table>

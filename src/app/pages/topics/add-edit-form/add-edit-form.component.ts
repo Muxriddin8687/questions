@@ -8,9 +8,11 @@ import { ReactiveFormsModule, Validators } from "@angular/forms";
 import { BaseComponent } from "@core/components/base.component";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { ButtonModule } from "primeng/button";
+import { DropdownModule } from "primeng/dropdown";
 import { InputTextModule } from "primeng/inputtext";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { SubjectService } from "src/app/services/subject.service";
+import { TopicService } from "src/app/services/topic.service";
 
 @UntilDestroy()
 @Component({
@@ -23,13 +25,16 @@ import { SubjectService } from "src/app/services/subject.service";
     ReactiveFormsModule,
     InputTextModule,
     InputTextareaModule,
+    DropdownModule,
   ],
 })
 export class AddEditFormComponent extends BaseComponent implements OnInit {
-  private _subjectService = inject(SubjectService);
+  private _topicService = inject(TopicService);
+  protected _subjectService = inject(SubjectService);
 
   form = this._fb.group({
     id: [null],
+    subjectId: [null, Validators.required],
     title: ["", [Validators.required, Validators.minLength(3)]],
     description: [""],
   });
@@ -40,11 +45,12 @@ export class AddEditFormComponent extends BaseComponent implements OnInit {
   }
 
   loadData(id: number) {
-    this._subjectService
+    this._topicService
       .getOne(id)
       .pipe(untilDestroyed(this))
       .subscribe({
-        next: (data: any) => this.form.patchValue(data),
+        next: (data: any) =>
+          this.form.patchValue({ ...data, subjectId: data?.subject?.id }),
         error: () => this.errorMessgae(),
       });
   }
@@ -56,7 +62,7 @@ export class AddEditFormComponent extends BaseComponent implements OnInit {
     }
 
     if (!this.form.value.id) {
-      this._subjectService
+      this._topicService
         .insert(this.form.value)
         .pipe(untilDestroyed(this))
         .subscribe({
@@ -68,7 +74,7 @@ export class AddEditFormComponent extends BaseComponent implements OnInit {
           error: () => this.errorMessgae(),
         });
     } else {
-      this._subjectService
+      this._topicService
         .update(this.form.value)
         .pipe(untilDestroyed(this))
         .subscribe({

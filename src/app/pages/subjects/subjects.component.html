@@ -1,58 +1,56 @@
 <div class="flex flex-wrap align-items-center justify-content-between">
-    <h4 class="mb-0">Fanlar</h4>
-    <p-button (click)="openAddModal()" icon="pi pi-plus" label="Yangi fan" />
+  <h4 class="mb-0">Fanlar</h4>
+  <p-button (click)="openAddModal()" icon="pi pi-plus" label="Yangi fan" />
 </div>
 
 <hr />
 
 <p-table
-    [value]="_subjectService.data().content"
-    styleClass="p-datatable-gridlines p-datatable-striped"
-    [tableStyle]="{ 'min-width': '500px', height: '' }"
-    [scrollable]="true"
-    scrollHeight="400px"
+  [value]="_subjectService.data().content"
+  styleClass="p-datatable-gridlines p-datatable-striped"
+  [tableStyle]="{ 'min-width': '500px' }"
 >
-    <ng-template pTemplate="header">
-        <tr>
-            <th width="60px">№</th>
-            <th>Nomi</th>
-            <th>Izoh</th>
-            <th width="110px"></th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
-        <tr>
-            <td>{{ rowIndex + 1 }}</td>
-            <td>{{ item.title }}</td>
-            <td>{{ item.description }}</td>
-            <td>
-                <button
-                    pButton
-                    pRipple
-                    type="button"
-                    icon="pi pi-pencil"
-                    (click)="update(item.id)"
-                    class="p-button-rounded p-button-warning p-button-outlined mr-2"
-                ></button>
-                <button
-                    pButton
-                    pRipple
-                    type="button"
-                    icon="pi pi-times"
-                    (click)="deleteDialog($event, item.id)"
-                    class="p-button-rounded p-button-danger p-button-outlined"
-                ></button>
-            </td>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="emptymessage">
-        <tr>
-            <td colspan="4">Ma'lumot yo'q</td>
-        </tr>
-    </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th width="60px">№</th>
+      <th>Nomi</th>
+      <th>Izoh</th>
+      <th width="110px"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
+    <tr>
+      <td>{{ rowIndex + 1 }}</td>
+      <td>{{ item.title }}</td>
+      <td>{{ item.description }}</td>
+      <td>
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-pencil"
+          (click)="update(item.id)"
+          class="p-button-rounded p-button-warning p-button-outlined mr-2"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-times"
+          (click)="deleteDialog($event, item.id)"
+          class="p-button-rounded p-button-danger p-button-outlined"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="4">Ma'lumot yo'q</td>
+    </tr>
+  </ng-template>
 </p-table>
 
-<!-- 
+<!--
 <p-table
     [value]="_subjectService.data()"
     styleClass="p-datatable-gridlines p-datatable-striped"

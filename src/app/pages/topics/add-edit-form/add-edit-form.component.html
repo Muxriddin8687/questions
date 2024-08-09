@@ -10,6 +10,17 @@
     <label for="float-input">Nomi</label>
   </span>
 
+  <span class="p-float-label w-full mt-2 mb-4">
+    <p-dropdown
+      class="w-full"
+      [options]="_subjectService.data()?.content"
+      formControlName="subjectId"
+      optionLabel="title"
+      optionValue="id"
+    />
+    <label for="dropdown">Fan</label>
+  </span>
+
   <textarea
     placeholder="Izoh"
     formControlName="description"
