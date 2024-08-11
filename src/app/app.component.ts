@@ -1,9 +1,17 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { PrimeNGConfig } from "primeng/api";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { ToastModule } from "primeng/toast";
+import { SubjectService } from "./services/subject.service";
+import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 
+@UntilDestroy()
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -12,11 +20,14 @@ import { ToastModule } from "primeng/toast";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
+  private _subjectService = inject(SubjectService);
   constructor(private primengConfig: PrimeNGConfig) {}
 
   ngOnInit(): void {
     this.primengConfig.ripple = true;
     document.documentElement.style.fontSize = "14px";
+
+    this._subjectService.getAll().pipe(untilDestroyed(this)).subscribe();
   }
 
   // mdc-light-indigo light

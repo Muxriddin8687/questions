@@ -5,23 +5,35 @@
 
 <hr />
 
+<!-- filter form -->
+<form [formGroup]="filterForm" class="flex gap-2">
+  <span class="p-float-label mt-2 mb-4" style="min-width: 150px">
+    <input id="float-input" formControlName="search" type="text" pInputText />
+    <label for="float-input">Qidirish</label>
+  </span>
+  <span class="p-float-label mt-2 mb-4" style="min-width: 150px">
+    <p-dropdown
+      class="w-full"
+      [options]="_subjectService.data()?.content"
+      formControlName="subjectId"
+      [showClear]="true"
+      optionLabel="title"
+      optionValue="id"
+    />
+    <label for="dropdown">Fan</label>
+  </span>
+</form>
+
 <p-table
   [value]="_topicService.data().content"
   styleClass="p-datatable-gridlines p-datatable-striped"
   [tableStyle]="{ 'min-width': '500px' }"
-  [paginator]="true"
-  [first]="0"
-  [rows]="15"
-  currentPageReportTemplate="{totalRecords} tadan {first} dan {last} gacha"
-  (onPage)="pageChange($event)"
-  [showCurrentPageReport]="true"
-  [rowsPerPageOptions]="[15, 20, 50]"
   (sortFunction)="customSort($event)"
   [customSort]="true"
 >
   <ng-template pTemplate="header">
     <tr>
-      <th pSortableColumn="id" width="60px">№<p-sortIcon field="id" /></th>
+      <th width="60px">№</th>
       <th pSortableColumn="title">Nomi<p-sortIcon field="title" /></th>
       <th pSortableColumn="subjectId">Fan<p-sortIcon field="subjectId" /></th>
       <th>Izoh</th>

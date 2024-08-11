@@ -19,12 +19,8 @@ import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
   templateUrl: "./subjects.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SubjectsComponent extends BaseComponent implements OnInit {
+export class SubjectsComponent extends BaseComponent {
   protected _subjectService = inject(SubjectService);
-
-  ngOnInit(): void {
-    this._subjectService.getAll().pipe(untilDestroyed(this)).subscribe();
-  }
 
   override delete(id: number) {
     this._subjectService

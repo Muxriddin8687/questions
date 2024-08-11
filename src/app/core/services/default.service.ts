@@ -10,6 +10,11 @@ import removeEmptyProperties from "@shared/utils/removeEmptyProperties.util";
 export class DefaultService<T, Ti, Tu> {
   _http = inject(HttpClient);
   _api = environment.api;
+  filterParams = {
+    size: 20,
+    page: 0,
+  };
+  defaultParams = {};
 
   reloadDataAction$$ = new Subject<boolean>();
   subscription = new Subscription();
@@ -19,8 +24,8 @@ export class DefaultService<T, Ti, Tu> {
     this._api += this.url;
   }
 
-  loadData() {
-    this.subscription = this.getAll().subscribe((data: any) => {
+  loadData(params?: any) {
+    this.subscription = this.getByFilter(params).subscribe((data: any) => {
       this.data.set(data);
       this.subscription.unsubscribe();
     });
@@ -28,7 +33,7 @@ export class DefaultService<T, Ti, Tu> {
 
   getAll<T>() {
     return this._http
-      .get<T[]>(this._api)
+      .get<T[]>(this._api + "/page")
       .pipe(tap((res: any) => this.data.set(res)));
   }
 
@@ -36,11 +41,14 @@ export class DefaultService<T, Ti, Tu> {
     return this._http.get<Tu>(this._api + "/" + id + "?" + params);
   }
 
-  getByFilter<T>(filter: Tu | any) {
+  getByFilter<T>(filter?: Tu | any) {
     let data = removeEmptyProperties(filter);
+    data = { ...this.filterParams, ...data };
+    data = { ...data, ...this.defaultParams };
     data = new URLSearchParams(data).toString();
+
     return this._http
-      .get<T>(this._api + "?" + data)
+      .get<T>(this._api + "/page?" + data)
       .pipe(tap((res: any) => this.data.set(res)));
   }
 
