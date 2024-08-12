@@ -20,14 +20,11 @@ import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  private _subjectService = inject(SubjectService);
-  constructor(private primengConfig: PrimeNGConfig) {}
+  constructor(private primengConfig: PrimeNGConfig) { }
 
   ngOnInit(): void {
     this.primengConfig.ripple = true;
     document.documentElement.style.fontSize = "14px";
-
-    this._subjectService.getAll().pipe(untilDestroyed(this)).subscribe();
   }
 
   // mdc-light-indigo light

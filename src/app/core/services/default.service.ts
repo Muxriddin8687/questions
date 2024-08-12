@@ -1,6 +1,6 @@
 import { Inject, inject, Injectable, signal } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Subject, Subscription, tap } from "rxjs";
+import { Subject, Subscription, take, tap } from "rxjs";
 import { environment } from "src/environments/environment";
 import removeEmptyProperties from "@shared/utils/removeEmptyProperties.util";
 
@@ -10,7 +10,7 @@ import removeEmptyProperties from "@shared/utils/removeEmptyProperties.util";
 export class DefaultService<T, Ti, Tu> {
   _http = inject(HttpClient);
   _api = environment.api;
-  filterParams = {
+  filterParams: any = {
     size: 20,
     page: 0,
   };
@@ -24,11 +24,13 @@ export class DefaultService<T, Ti, Tu> {
     this._api += this.url;
   }
 
-  loadData(params?: any) {
-    this.subscription = this.getByFilter(params).subscribe((data: any) => {
-      this.data.set(data);
-      this.subscription.unsubscribe();
-    });
+  loadData() {
+    this.getByFilter()
+      .pipe(
+        take(1),
+        tap((data) => this.data.set(data))
+      )
+      .subscribe();
   }
 
   getAll<T>() {
@@ -42,8 +44,9 @@ export class DefaultService<T, Ti, Tu> {
   }
 
   getByFilter<T>(filter?: Tu | any) {
-    let data = removeEmptyProperties(filter);
-    data = { ...this.filterParams, ...data };
+    let data = removeEmptyProperties(filter ?? {});
+    const tableFilter = removeEmptyProperties(this.filterParams ?? {});
+    data = { ...tableFilter, ...data };
     data = { ...data, ...this.defaultParams };
     data = new URLSearchParams(data).toString();
 

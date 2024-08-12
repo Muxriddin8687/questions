@@ -28,14 +28,12 @@
   [value]="_topicService.data().content"
   styleClass="p-datatable-gridlines p-datatable-striped"
   [tableStyle]="{ 'min-width': '500px' }"
-  (sortFunction)="customSort($event)"
-  [customSort]="true"
 >
   <ng-template pTemplate="header">
     <tr>
       <th width="60px">№</th>
       <th pSortableColumn="title">Nomi<p-sortIcon field="title" /></th>
-      <th pSortableColumn="subjectId">Fan<p-sortIcon field="subjectId" /></th>
+      <th pSortableColumn="subject.title">Fan<p-sortIcon field="subjectId" /></th>
       <th>Izoh</th>
       <th width="110px"></th>
     </tr>

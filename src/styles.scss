@@ -10,7 +10,8 @@ $gutter: 1rem; //for primeflex grid system
 @import "../node_modules/primeng/resources/themes/mdc-light-indigo/theme.css";
 
 ::-webkit-scrollbar {
-    width: 4px;
+    width: 3px;
+    height: 3px;
 }
 
 ::-webkit-scrollbar-track {

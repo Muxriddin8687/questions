@@ -19,8 +19,12 @@ import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
   templateUrl: "./subjects.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SubjectsComponent extends BaseComponent {
+export class SubjectsComponent extends BaseComponent implements OnInit {
   protected _subjectService = inject(SubjectService);
+
+  ngOnInit(): void {
+    this._subjectService.defaultParams = { size: 500, sort: "title" };
+  }
 
   override delete(id: number) {
     this._subjectService
@@ -50,12 +54,4 @@ export class SubjectsComponent extends BaseComponent {
       breakpoints: { "960px": "75vw" },
     });
   }
-
-  // pageChange(event: any) {
-  //   console.log(event);
-  // }
-
-  // customSort(event: any) {
-  //   console.log(event);
-  // }
 }

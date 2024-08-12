@@ -14,13 +14,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { InputTextModule } from "primeng/inputtext";
 import { DropdownModule } from "primeng/dropdown";
 import { SubjectService } from "src/app/services/subject.service";
-import {
-  debounce,
-  debounceTime,
-  distinctUntilChanged,
-  switchMap,
-  tap,
-} from "rxjs";
+import { debounceTime, distinctUntilChanged, switchMap, tap } from "rxjs";
 
 @UntilDestroy()
 @Component({
@@ -40,24 +34,22 @@ export class TopicsComponent extends BaseComponent implements OnInit {
   protected _topicService = inject(TopicService);
   protected _subjectService = inject(SubjectService);
   filterForm = this._fb.group({
-    search: [""],
+    search: [null],
     subjectId: [null],
   });
 
   ngOnInit(): void {
     this._topicService.defaultParams = { size: 500 };
-
-    this._topicService
-      .getByFilter({ sort: "title" })
-      .pipe(untilDestroyed(this))
-      .subscribe();
+    this._topicService.filterParams = { sort: "title,asc" };
+    this._topicService.loadData();
 
     this.filterForm.valueChanges
       .pipe(
         untilDestroyed(this),
         debounceTime(500),
         distinctUntilChanged(),
-        switchMap((val) => this._topicService.getByFilter(val))
+        tap((val) => this._topicService.filterParams = { ...val }),
+        switchMap((val) => this._topicService.getByFilter(val)),
       )
       .subscribe();
   }
@@ -87,14 +79,5 @@ export class TopicsComponent extends BaseComponent implements OnInit {
       header: "Mavzu qo'shish",
       style: { width: "450px", minWidth: "300px" },
     });
-  }
-
-  customSort($event: any) {
-    console.log($event);
-
-    this._topicService
-      .getByFilter({ sort: "title" })
-      .pipe(untilDestroyed(this))
-      .subscribe();
   }
 }
