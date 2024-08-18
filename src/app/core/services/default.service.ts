@@ -39,6 +39,10 @@ export class DefaultService<T, Ti, Tu> {
       .pipe(tap((res: any) => this.data.set(res)));
   }
 
+  getByList() {
+    return this._http.get<any>(this._api + "/list");
+  }
+
   getOne<Tu>(id: number, params: string = "") {
     return this._http.get<Tu>(this._api + "/" + id + "?" + params);
   }
