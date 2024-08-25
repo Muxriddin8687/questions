@@ -6,34 +6,7 @@
 <hr />
 
 <!-- filter form -->
-<form [formGroup]="filterForm" class="flex gap-2">
-  <span class="p-float-label mt-2 mb-4" style="min-width: 150px">
-    <input id="float-input" formControlName="search" type="text" pInputText />
-    <label for="float-input">Qidirish</label>
-  </span>
-  <span class="p-float-label mt-2 mb-4" style="min-width: 150px">
-    <p-dropdown
-      class="w-full"
-      [options]="_subjectService.data()?.content"
-      formControlName="subjectId"
-      [showClear]="true"
-      optionLabel="title"
-      optionValue="id"
-    />
-    <label for="dropdown">Fan</label>
-  </span>
-  <span class="p-float-label mt-2 mb-4" style="min-width: 150px">
-    <p-dropdown
-      class="w-full"
-      [options]="topics()"
-      formControlName="topicId"
-      [showClear]="true"
-      optionLabel="title"
-      optionValue="id"
-    />
-    <label for="dropdown">Mavzu</label>
-  </span>
-</form>
+<app-filter />
 
 <p-table
   [value]="_questionService.data().content"
@@ -44,9 +17,7 @@
     <tr>
       <th width="60px">№</th>
       <th pSortableColumn="title">Nomi<p-sortIcon field="title" /></th>
-      <th pSortableColumn="subject.title">
-        Fan<p-sortIcon field="subjectId" />
-      </th>
+      <th pSortableColumn="subject.title">Fan<p-sortIcon field="subjectId" /></th>
       <th>Izoh</th>
       <th width="110px"></th>
     </tr>
@@ -83,3 +54,47 @@
     </tr>
   </ng-template>
 </p-table>
+
+<!--
+<p-table
+    [value]="_subjectService.data()"
+    styleClass="p-datatable-gridlines p-datatable-striped"
+    responsiveLayout="scroll"
+    [breakpoint]="'960px'"
+    [paginator]="true"
+    [first]="0"
+    [rows]="15"
+    currentPageReportTemplate="{totalRecords} tadan {first} dan {last} gacha"
+    (onPage)="pageChange($event)"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[15, 20, 50]"
+    (sortFunction)="customSort($event)"
+    [customSort]="true"
+    (onRowSelect)="onRowSelect($event)"
+    selectionMode="single"
+    [(selection)]="selectedRow"
+    dataKey="code"
+>
+    <ng-template pTemplate="header">
+        <tr>
+            <th width="20px">№</th>
+            <th pSortableColumn="name">Nomi<p-sortIcon field="name" /></th>
+            <th>Izoh</th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
+        <tr [pSelectableRow]="selectedRow">
+            <td width="20px">{{ rowIndex + 1 }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.description }}</td>
+            <td>qwerty</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="4">Ma'lumot yo'q</td>
+            </tr>
+        </ng-template>
+</p-table>
+-->

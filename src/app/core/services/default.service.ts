@@ -2,7 +2,6 @@ import { Inject, inject, Injectable, signal } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Subject, Subscription, take, tap } from "rxjs";
 import { environment } from "src/environments/environment";
-import removeEmptyProperties from "@shared/utils/removeEmptyProperties.util";
 
 @Injectable({
   providedIn: "root",
@@ -34,9 +33,7 @@ export class DefaultService<T, Ti, Tu> {
   }
 
   getAll<T>() {
-    return this._http
-      .get<T[]>(this._api + "/page")
-      .pipe(tap((res: any) => this.data.set(res)));
+    return this._http.get<T[]>(this._api + "/page").pipe(tap((res: any) => this.data.set(res)));
   }
 
   getByList() {
@@ -48,43 +45,39 @@ export class DefaultService<T, Ti, Tu> {
   }
 
   getByFilter<T>(filter?: Tu | any) {
-    let data = removeEmptyProperties(filter ?? {});
-    const tableFilter = removeEmptyProperties(this.filterParams ?? {});
+    let data = this.removeEmptyProperties(filter ?? {});
+    const tableFilter = this.removeEmptyProperties(this.filterParams ?? {});
     data = { ...tableFilter, ...data };
     data = { ...data, ...this.defaultParams };
-    data = new URLSearchParams(data).toString();
+    const newParams = new URLSearchParams(data).toString();
 
-    return this._http
-      .get<T>(this._api + "/page?" + data)
-      .pipe(tap((res: any) => this.data.set(res)));
+    return this._http.get<T>(this._api + "/page?" + newParams).pipe(tap((res: any) => this.data.set(res)));
   }
 
   insert(form: Ti) {
-    return this._http
-      .post<Ti>(this._api, form)
-      .pipe(tap(() => this.reloadData()));
+    return this._http.post<Ti>(this._api, form).pipe(tap(() => this.reloadData()));
   }
 
   delete(id: number) {
-    return this._http
-      .delete(this._api + "/" + id)
-      .pipe(tap(() => this.reloadData()));
+    return this._http.delete(this._api + "/" + id).pipe(tap(() => this.reloadData()));
   }
 
   update(form: Tu | any) {
-    return this._http
-      .put(this._api + "/" + form!.id, form)
-      .pipe(tap(() => this.reloadData()));
+    return this._http.put(this._api + "/" + form!.id, form).pipe(tap(() => this.reloadData()));
   }
 
   patch(form: Tu | any) {
-    return this._http
-      .patch(this._api + "/" + form!.id, form)
-      .pipe(tap(() => this.reloadData()));
+    return this._http.patch(this._api + "/" + form!.id, form).pipe(tap(() => this.reloadData()));
   }
 
   reloadData() {
     this.reloadDataAction$$.next(true);
     this.loadData();
+  }
+
+  removeEmptyProperties(filterParams: object) {
+    return Object.fromEntries(
+      Object.entries(filterParams).filter(([, v]) => v !== null && v !== undefined && v !== "")
+    );
   }
 }

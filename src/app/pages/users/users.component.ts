@@ -44,16 +44,14 @@ export class UsersComponent extends BaseComponent implements OnInit {
         id: id,
       },
       header: "Foydalanuvchini tahrirlash",
-      style: { width: "400px", minWidth: "300px" },
-      breakpoints: { "960px": "75vw" },
+      breakpoints: { "600px": "90vw", "960px": "75vw", "2500px": "500px" },
     });
   }
 
   openAddModal() {
     this._modalService.open(AddEditFormComponent, {
       header: "Foydalanuvchi qo'shish",
-      style: { width: "400px", minWidth: "300px" },
-      breakpoints: { "960px": "75vw" },
+      breakpoints: { "600px": "90vw", "960px": "75vw", "2500px": "500px" },
     });
   }
 }
