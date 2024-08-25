@@ -1,0 +1,48 @@
+<form [formGroup]="form" (ngSubmit)="submit()" autocomplete="nope">
+  <span class="p-float-label p-fluid">
+    <input formControlName="fullName" id="float-input" type="text" pInputText />
+    <label for="float-input">F.I.Sh</label>
+  </span>
+
+  <span class="p-float-label p-fluid">
+    <input formControlName="username" autocomplete="new-username" id="float-input" type="text" pInputText />
+    <label for="float-input">Login</label>
+  </span>
+
+  @if (!isEdit) {
+    <span class="p-float-label p-fluid">
+      <p-password formControlName="password" autocomplete="new-password" [toggleMask]="true" [feedback]="false" />
+      <label for="float-input">Parol</label>
+    </span>
+
+    <span class="p-float-label p-fluid">
+      <p-password
+        formControlName="confirmPassword"
+        autocomplete="confirm-password"
+        [toggleMask]="true"
+        [feedback]="false"
+      />
+      <label for="float-input">Parolni takrorlang</label>
+    </span>
+  }
+
+  <span class="p-float-label p-fluid">
+    <p-inputMask
+      formControlName="contact"
+      id="float-input"
+      mask="+999(99) 999-99-99"
+      placeholder="+999(99) 999-99-99"
+    />
+    <label for="float-input">Telefon</label>
+  </span>
+
+  <span class="p-float-label p-fluid">
+    <input formControlName="email" id="float-input" type="text" pInputText />
+    <label for="float-input">Email</label>
+  </span>
+
+  <div class="form-footer">
+    <p-button (click)="closeModal()" severity="warning" icon="pi pi-cancel" label="Bekor qilish" />
+    <p-button class="me-0" type="submit" icon="pi pi-check" label="Saqlash" />
+  </div>
+</form>

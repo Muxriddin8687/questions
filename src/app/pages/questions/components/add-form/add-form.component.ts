@@ -16,8 +16,8 @@ import { TopicService } from "src/app/services/topic.service";
 
 @UntilDestroy()
 @Component({
-  selector: "app-add-edit-form",
-  templateUrl: "./add-edit-form.component.html",
+  selector: "app-add-form",
+  templateUrl: "./add-form.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
@@ -28,7 +28,7 @@ import { TopicService } from "src/app/services/topic.service";
     DropdownModule,
   ],
 })
-export class AddEditFormComponent extends BaseComponent implements OnInit {
+export class AddFormComponent extends BaseComponent implements OnInit {
   private _topicService = inject(TopicService);
   protected _subjectService = inject(SubjectService);
 

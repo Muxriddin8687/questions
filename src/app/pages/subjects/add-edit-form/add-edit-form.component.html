@@ -1,36 +1,13 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
-  <span class="p-float-label w-full mt-2 mb-4">
-    <input
-      class="w-full"
-      formControlName="title"
-      id="float-input"
-      type="text"
-      pInputText
-    />
+  <span class="p-float-label p-fluid">
+    <input formControlName="title" id="float-input" type="text" pInputText />
     <label for="float-input">Nomi</label>
   </span>
 
-  <textarea
-    placeholder="Izoh"
-    formControlName="description"
-    class="w-full"
-    rows="5"
-    pInputTextarea
-  ></textarea>
+  <textarea placeholder="Izoh" formControlName="description" class="w-full" rows="5" pInputTextarea></textarea>
 
   <div class="form-footer">
-    <p-button
-      (click)="closeModal()"
-      severity="warning"
-      icon="pi pi-cancel"
-      label="Bekor qilish"
-    />
-    <p-button
-      [disabled]="form.invalid"
-      class="me-0"
-      type="submit"
-      icon="pi pi-check"
-      label="Saqlash"
-    />
+    <p-button (click)="closeModal()" severity="warning" icon="pi pi-cancel" label="Bekor qilish" />
+    <p-button [disabled]="form.invalid" class="me-0" type="submit" icon="pi pi-check" label="Saqlash" />
   </div>
 </form>

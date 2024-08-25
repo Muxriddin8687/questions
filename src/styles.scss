@@ -49,6 +49,11 @@ $gutter: 1rem; //for primeflex grid system
     }
 }
 
+.p-float-label.p-fluid {
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
 .form-footer {
     display: flex;
     flex-wrap: wrap;

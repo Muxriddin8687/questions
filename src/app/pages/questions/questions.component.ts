@@ -15,9 +15,9 @@ import { TableModule } from "primeng/table";
 import { debounceTime, distinctUntilChanged, switchMap, tap } from "rxjs";
 import { SubjectService } from "src/app/services/subject.service";
 import { TopicService } from "src/app/services/topic.service";
-import { AddEditFormComponent } from "./add-edit-form/add-edit-form.component";
 import { QuestionService } from "src/app/services/question.service";
 import { AsyncPipe } from "@angular/common";
+import { AddFormComponent } from "./components/add-form/add-form.component";
 
 @Component({
   selector: "app-questions",
@@ -75,7 +75,7 @@ export class QuestionsComponent extends BaseComponent implements OnInit {
   }
 
   update(id: number) {
-    this._modalService.open(AddEditFormComponent, {
+    this._modalService.open(AddFormComponent, {
       data: {
         id: id,
       },
@@ -85,7 +85,7 @@ export class QuestionsComponent extends BaseComponent implements OnInit {
   }
 
   openAddModal() {
-    this._modalService.open(AddEditFormComponent, {
+    this._modalService.open(AddFormComponent, {
       header: "Savol qo'shish",
       style: { width: "450px", minWidth: "300px" },
     });
