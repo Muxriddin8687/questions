@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  OnInit,
-} from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject, OnInit } from "@angular/core";
 import { BaseComponent } from "@core/components/base.component";
 import { ButtonModule } from "primeng/button";
 import { AddEditFormComponent } from "./add-edit-form/add-edit-form.component";
@@ -32,7 +27,7 @@ export class SubjectsComponent extends BaseComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe({
         next: () => this.successMessage("Fan o'chirildi."),
-        error: () => this.errorMessgae(),
+        error: () => this.errorMessage(),
       });
   }
 
@@ -42,16 +37,14 @@ export class SubjectsComponent extends BaseComponent implements OnInit {
         id: id,
       },
       header: "Fan yangilash",
-      style: { width: "400px", minWidth: "300px" },
-      breakpoints: { "960px": "75vw" },
+      breakpoints: { "600px": "90vw", "960px": "75vw", "2500px": "500px" },
     });
   }
 
   openAddModal() {
     this._modalService.open(AddEditFormComponent, {
       header: "Fan qo'shish",
-      style: { width: "400px", minWidth: "300px" },
-      breakpoints: { "960px": "75vw" },
+      breakpoints: { "600px": "90vw", "960px": "75vw", "2500px": "500px" },
     });
   }
 }

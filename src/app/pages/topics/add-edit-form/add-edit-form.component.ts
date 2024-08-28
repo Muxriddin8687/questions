@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  OnInit,
-} from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject, OnInit } from "@angular/core";
 import { ReactiveFormsModule, Validators } from "@angular/forms";
 import { BaseComponent } from "@core/components/base.component";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
@@ -20,13 +15,7 @@ import { TopicService } from "src/app/services/topic.service";
   templateUrl: "./add-edit-form.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    ButtonModule,
-    ReactiveFormsModule,
-    InputTextModule,
-    InputTextareaModule,
-    DropdownModule,
-  ],
+  imports: [ButtonModule, ReactiveFormsModule, InputTextModule, InputTextareaModule, DropdownModule],
 })
 export class AddEditFormComponent extends BaseComponent implements OnInit {
   private _topicService = inject(TopicService);
@@ -49,9 +38,8 @@ export class AddEditFormComponent extends BaseComponent implements OnInit {
       .getOne(id)
       .pipe(untilDestroyed(this))
       .subscribe({
-        next: (data: any) =>
-          this.form.patchValue({ ...data, subjectId: data?.subject?.id }),
-        error: () => this.errorMessgae(),
+        next: (data: any) => this.form.patchValue({ ...data, subjectId: data?.subject?.id }),
+        error: () => this.errorMessage(),
       });
   }
 
@@ -71,7 +59,7 @@ export class AddEditFormComponent extends BaseComponent implements OnInit {
             this.form.reset();
             this.successMessage();
           },
-          error: () => this.errorMessgae(),
+          error: () => this.errorMessage(),
         });
     } else {
       this._topicService
@@ -83,7 +71,7 @@ export class AddEditFormComponent extends BaseComponent implements OnInit {
             this.form.reset();
             this.successUpdateMessage();
           },
-          error: () => this.errorMessgae(),
+          error: () => this.errorMessage(),
         });
     }
   }

@@ -1,20 +1,86 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
-  <span class="p-float-label p-fluid">
-    <input formControlName="title" id="float-input" type="text" pInputText />
-    <label for="float-input">Nomi</label>
-  </span>
+  <div class="grid">
+    <div class="col-12 md:col-6">
+      <span class="p-float-label p-fluid">
+        <p-dropdown
+          [options]="_subjectService.data()?.content"
+          (onChange)="loadTopicsList($event)"
+          optionLabel="title"
+          optionValue="id"
+        />
+        <label for="dropdown">Fan</label>
+      </span>
+    </div>
 
-  <span class="p-float-label p-fluid">
-    <p-dropdown
-      [options]="_subjectService.data()?.content"
-      formControlName="subjectId"
-      optionLabel="title"
-      optionValue="id"
-    />
-    <label for="dropdown">Fan</label>
-  </span>
+    <div class="col-12 md:col-6">
+      <span class="p-float-label p-fluid">
+        <p-dropdown [options]="topics$ | async" formControlName="topicId" optionLabel="title" optionValue="id" />
+        <label for="dropdown">Mavzu</label>
+      </span>
+    </div>
+  </div>
 
-  <textarea placeholder="Izoh" formControlName="description" class="w-full" rows="5" pInputTextarea></textarea>
+  <div formArrayName="questions">
+    @for (question of getQuestions().controls; track question; let i = $index) {
+      <div class="grid mb-5" [formGroupName]="i">
+        <div class="col-12 md:col-6">
+          <div class="flex align-items-center justify-content-center">
+            <span>{{ i + 1 }}.&nbsp;</span>
+            <span class="p-float-label p-fluid w-full m-0">
+              <input formControlName="value" id="float-input" type="text" pInputText />
+              <label for="float-input">Savol</label>
+            </span>
+          </div>
+        </div>
+
+        <div class="col-12 md:col-6">
+          <div class="flex align-items-center justify-content-center">
+            <span class="p-float-label p-fluid m-0 w-full">
+              <input formControlName="description" id="float-input" type="text" pInputText />
+              <label for="float-input">Izoh</label>
+            </span>
+
+            <button
+              (click)="removeQuestion(i)"
+              pButton
+              pRipple
+              icon="pi pi-times"
+              class="p-button-danger ml-2"
+            ></button>
+          </div>
+        </div>
+
+        <div class="col-12" formArrayName="answers">
+          @for (answer of getAnswers(i).controls; track answer; let j = $index) {
+            <div class="grid" [formGroupName]="j">
+              <div class="col-12 md:col-6">
+                <div class="flex align-items-center justify-content-center">
+                  <span>{{ j + 1 }}&rpar;&nbsp;</span>
+                  <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">
+                      <input type="checkbox" formControlName="isCorrect" />
+                    </span>
+                    <input type="text" pInputText formControlName="value" placeholder="Javob" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 md:col-6">
+                <span class="p-float-label p-fluid m-0">
+                  <input formControlName="description" id="float-input" type="text" pInputText />
+                  <label for="float-input">Izoh</label>
+                </span>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <div class="flex justify-content-end mt-3">
+      <button (click)="addQuestion()" pButton pRipple icon="pi pi-plus"></button>
+    </div>
+  </div>
 
   <div class="form-footer">
     <p-button (click)="closeModal()" severity="warning" icon="pi pi-cancel" label="Bekor qilish" />

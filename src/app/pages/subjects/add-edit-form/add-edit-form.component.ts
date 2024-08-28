@@ -12,12 +12,7 @@ import { SubjectService } from "src/app/services/subject.service";
   selector: "app-add-edit-form",
   templateUrl: "./add-edit-form.component.html",
   standalone: true,
-  imports: [
-    ButtonModule,
-    ReactiveFormsModule,
-    InputTextModule,
-    InputTextareaModule,
-  ],
+  imports: [ButtonModule, ReactiveFormsModule, InputTextModule, InputTextareaModule],
 })
 export class AddEditFormComponent extends BaseComponent implements OnInit {
   private _subjectService = inject(SubjectService);
@@ -39,7 +34,7 @@ export class AddEditFormComponent extends BaseComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe({
         next: (data: any) => this.form.patchValue(data),
-        error: () => this.errorMessgae(),
+        error: () => this.errorMessage(),
       });
   }
 
@@ -59,7 +54,7 @@ export class AddEditFormComponent extends BaseComponent implements OnInit {
             this.form.reset();
             this.successMessage();
           },
-          error: () => this.errorMessgae(),
+          error: () => this.errorMessage(),
         });
     } else {
       this._subjectService
@@ -71,7 +66,7 @@ export class AddEditFormComponent extends BaseComponent implements OnInit {
             this.form.reset();
             this.successUpdateMessage();
           },
-          error: () => this.errorMessgae(),
+          error: () => this.errorMessage(),
         });
     }
   }

@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  OnInit,
-} from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject, OnInit } from "@angular/core";
 import { BaseComponent } from "@core/components/base.component";
 import { ButtonModule } from "primeng/button";
 import { TableModule } from "primeng/table";
@@ -20,13 +15,7 @@ import { debounceTime, distinctUntilChanged, switchMap, tap } from "rxjs";
 @Component({
   selector: "app-topics",
   standalone: true,
-  imports: [
-    ButtonModule,
-    TableModule,
-    ReactiveFormsModule,
-    InputTextModule,
-    DropdownModule,
-  ],
+  imports: [ButtonModule, TableModule, ReactiveFormsModule, InputTextModule, DropdownModule],
   templateUrl: "./topics.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -48,8 +37,8 @@ export class TopicsComponent extends BaseComponent implements OnInit {
         untilDestroyed(this),
         debounceTime(500),
         distinctUntilChanged(),
-        tap((val) => this._topicService.filterParams = { ...val }),
-        switchMap((val) => this._topicService.getByFilter(val)),
+        tap((val) => (this._topicService.filterParams = { ...val })),
+        switchMap((val) => this._topicService.getByFilter(val))
       )
       .subscribe();
   }
@@ -60,7 +49,7 @@ export class TopicsComponent extends BaseComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe({
         next: () => this.successMessage("Mavzu o'chirildi."),
-        error: () => this.errorMessgae(),
+        error: () => this.errorMessage(),
       });
   }
 
@@ -70,14 +59,14 @@ export class TopicsComponent extends BaseComponent implements OnInit {
         id: id,
       },
       header: "Mavzu yangilash",
-      style: { width: "450px", minWidth: "300px" },
+      breakpoints: { "600px": "90vw", "960px": "75vw", "2500px": "500px" },
     });
   }
 
   openAddModal() {
     this._modalService.open(AddEditFormComponent, {
       header: "Mavzu qo'shish",
-      style: { width: "450px", minWidth: "300px" },
+      breakpoints: { "600px": "90vw", "960px": "75vw", "2500px": "500px" },
     });
   }
 }

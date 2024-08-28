@@ -30,7 +30,7 @@ export class QuestionsComponent extends BaseComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe({
         next: () => this.successMessage("Savol o'chirildi."),
-        error: () => this.errorMessgae(),
+        error: () => this.errorMessage(),
       });
   }
 
@@ -40,14 +40,16 @@ export class QuestionsComponent extends BaseComponent implements OnInit {
         id: id,
       },
       header: "Savolni tahrirlash",
-      style: { width: "450px", minWidth: "300px" },
+      breakpoints: { "600px": "90vw", "960px": "75vw", "2500px": "500px" },
     });
   }
 
   openAddModal() {
     this._modalService.open(AddFormComponent, {
       header: "Savol qo'shish",
-      style: { width: "450px", minWidth: "300px" },
+      style: { "overflow-y": "auto", "max-height": "80vh" },
+      breakpoints: { "600px": "100vw", "960px": "80vw", "2500px": "60vw" },
+      draggable: false,
     });
   }
 }

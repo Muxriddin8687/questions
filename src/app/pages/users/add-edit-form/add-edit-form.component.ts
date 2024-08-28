@@ -54,7 +54,7 @@ export class AddEditFormComponent extends BaseComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe({
         next: (data: any) => this.form.patchValue(data),
-        error: () => this.errorMessgae(),
+        error: () => this.errorMessage(),
       });
   }
 
@@ -63,7 +63,7 @@ export class AddEditFormComponent extends BaseComponent implements OnInit {
       this.form.markAllAsTouched();
 
       const confirmError: any = this.form?.errors;
-      confirmError["mismatch"] ? this.errorMessgae("Yangi parol va tasdiqlash paroli mos emas!") : null;
+      confirmError["mismatch"] ? this.errorMessage("Yangi parol va tasdiqlash paroli mos emas!") : null;
 
       return;
     }
@@ -80,7 +80,7 @@ export class AddEditFormComponent extends BaseComponent implements OnInit {
             this.form.reset();
             this.successMessage();
           },
-          error: () => this.errorMessgae(),
+          error: () => this.errorMessage(),
         });
     } else {
       this._userService
@@ -92,7 +92,7 @@ export class AddEditFormComponent extends BaseComponent implements OnInit {
             this.form.reset();
             this.successUpdateMessage();
           },
-          error: () => this.errorMessgae(),
+          error: () => this.errorMessage(),
         });
     }
   }

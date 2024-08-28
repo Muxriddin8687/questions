@@ -34,7 +34,7 @@ export class UsersComponent extends BaseComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe({
         next: () => this.successMessage("Foydalanuvchi o'chirildi."),
-        error: () => this.errorMessgae(),
+        error: () => this.errorMessage(),
       });
   }
 
