@@ -26,6 +26,7 @@ export class FilterComponent extends BaseComponent {
     search: [null],
     subjectId: [null],
     topicId: [null],
+    size: [15],
   });
 
   ngOnInit(): void {

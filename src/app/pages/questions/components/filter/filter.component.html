@@ -5,7 +5,7 @@
   </span>
   <span class="p-float-label mt-2 mb-4">
     <p-multiSelect
-      [style]="{ 'min-width': '150px' }"
+      [style]="{ 'min-width': '180px' }"
       [options]="_subjectService.data()?.content"
       formControlName="subjectId"
       [showClear]="true"
@@ -16,7 +16,7 @@
   </span>
   <span class="p-float-label mt-2 mb-4">
     <p-multiSelect
-      [style]="{ 'min-width': '150px' }"
+      [style]="{ 'min-width': '180px' }"
       [options]="topics()"
       formControlName="topicId"
       [showClear]="true"
@@ -24,5 +24,9 @@
       optionValue="id"
     />
     <label for="dropdown">Mavzu</label>
+  </span>
+  <span class="p-float-label mt-2 mb-4" style="min-width: 100px">
+    <input id="float-input" formControlName="size" type="text" pInputText />
+    <label for="float-input">Soni</label>
   </span>
 </form>
