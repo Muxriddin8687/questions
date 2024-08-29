@@ -6,13 +6,13 @@
 <hr />
 
 <!-- filter form -->
-<app-filter />
+<app-filter (onFilter)="onFilter($event)" />
 
 {{ data().content | json }}
 
 <p-paginator
   (onPageChange)="onPageChange($event)"
   [first]="0"
-  [rows]="data().size - 14"
+  [rows]="data().size"
   [totalRecords]="data()?.totalElements"
 />

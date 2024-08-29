@@ -7,6 +7,8 @@
     <p-multiSelect
       [style]="{ 'min-width': '180px' }"
       [options]="_subjectService.data()?.content"
+      (onChange)="loadTopicsList($event)"
+      [filter]="false"
       formControlName="subjectId"
       [showClear]="true"
       optionLabel="title"
@@ -17,9 +19,10 @@
   <span class="p-float-label mt-2 mb-4">
     <p-multiSelect
       [style]="{ 'min-width': '180px' }"
-      [options]="topics()"
+      [options]="topics$ | async"
       formControlName="topicId"
       [showClear]="true"
+      [filter]="false"
       optionLabel="title"
       optionValue="id"
     />

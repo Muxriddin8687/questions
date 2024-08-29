@@ -22,14 +22,22 @@ export class QuestionsComponent extends BaseComponent implements OnInit {
   filter = { sort: "id,asc", size: 15, page: 0 };
 
   ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData() {
     this._questionService.filterParams = { ...this.filter };
     this._questionService.loadData();
   }
 
   onPageChange(event: any) {
-    console.log(event);
-    this.filter = { ...this.filter, page: event.page + 1 };
-    this._questionService.loadData();
+    this.filter = { ...this.filter, page: event.page };
+    this.loadData();
+  }
+
+  onFilter(event: object) {
+    this.filter = { ...this.filter, ...event };
+    this.loadData();
   }
 
   override delete(id: number) {
