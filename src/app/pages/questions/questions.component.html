@@ -9,6 +9,11 @@
 <app-filter (onFilter)="onFilter($event)" />
 
 {{ data().content | json }}
+@for (item of data().content; track item.id) {
+  <app-question [data]="item" [editable]="true" />
+} @empty {
+  <p class="text-center">Savol topilmadi</p>
+}
 
 <p-paginator
   (onPageChange)="onPageChange($event)"

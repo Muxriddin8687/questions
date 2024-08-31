@@ -1,0 +1,40 @@
+<div class="question-block">
+  <div class="question">
+    <p class="question-text">
+      {{ data?.value }}
+      @if (data?.description) {
+        <i class="pi pi-info-circle" [pTooltip]="data?.description" tooltipPosition="bottom"></i>
+      }
+    </p>
+  </div>
+
+  <div class="answers">
+    @for (answer of data?.answers; track answer; let i = $index) {
+      <div class="answer">
+        <p class="answer-text">
+          <span [class]="answer?.isCorrect ? 'border-primary-500' : ''">
+            @switch (i) {
+              @case (0) {
+                A
+              }
+              @case (1) {
+                B
+              }
+              @case (2) {
+                C
+              }
+              @case (3) {
+                D
+              }
+            }
+            )&nbsp;
+          </span>
+          <span class="answer-value">{{ answer.value }}</span>
+          @if (answer?.description) {
+            <i class="pi pi-info-circle" [pTooltip]="answer?.description" tooltipPosition="bottom"></i>
+          }
+        </p>
+      </div>
+    }
+  </div>
+</div>

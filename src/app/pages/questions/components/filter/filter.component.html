@@ -1,4 +1,4 @@
-<form [formGroup]="filterForm" class="flex gap-2">
+<form [formGroup]="filterForm" class="flex flex-wrap gap-2">
   <span class="p-float-label mt-2 mb-4" style="min-width: 150px">
     <input id="float-input" formControlName="search" type="text" pInputText />
     <label for="float-input">Qidirish</label>
@@ -8,8 +8,9 @@
       [style]="{ 'min-width': '180px' }"
       [options]="_subjectService.data()?.content"
       (onChange)="loadTopicsList($event)"
+      (onClear)="loadTopicsList(null)"
       [filter]="false"
-      formControlName="subjectId"
+      formControlName="subjectIds"
       [showClear]="true"
       optionLabel="title"
       optionValue="id"
@@ -20,9 +21,10 @@
     <p-multiSelect
       [style]="{ 'min-width': '180px' }"
       [options]="topics$ | async"
-      formControlName="topicId"
+      formControlName="topicIds"
       [showClear]="true"
       [filter]="false"
+      [loading]="topicLoading"
       optionLabel="title"
       optionValue="id"
     />
@@ -32,4 +34,5 @@
     <input id="float-input" formControlName="size" type="text" pInputText />
     <label for="float-input">Soni</label>
   </span>
+  <button pButton label="Filter" class="mt-2 mb-4" (click)="filter()"></button>
 </form>

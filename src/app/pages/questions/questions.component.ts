@@ -7,12 +7,13 @@ import { JsonPipe } from "@angular/common";
 import { AddFormComponent } from "./components/add-form/add-form.component";
 import { FilterComponent } from "./components/filter/filter.component";
 import { PaginatorModule } from "primeng/paginator";
+import { QuestionComponent } from "./components/question/question.component";
 
 @UntilDestroy()
 @Component({
   selector: "app-questions",
   standalone: true,
-  imports: [ButtonModule, JsonPipe, FilterComponent, PaginatorModule],
+  imports: [ButtonModule, JsonPipe, FilterComponent, PaginatorModule, QuestionComponent],
   templateUrl: "./questions.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

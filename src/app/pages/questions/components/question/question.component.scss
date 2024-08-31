@@ -1,0 +1,25 @@
+.question-block {
+    display: block;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 2px 0 var(--gray-500);
+
+    .question-text {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: 600;
+        padding: 1rem;
+    }
+
+    .answers {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 1rem;
+
+        .answer {
+            display: block;
+            margin-bottom: 10px;
+            min-width: 400px;
+        }
+    }
+}

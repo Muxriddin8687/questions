@@ -6,7 +6,7 @@ import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { ButtonModule } from "primeng/button";
 import { DropdownChangeEvent, DropdownModule } from "primeng/dropdown";
 import { InputTextModule } from "primeng/inputtext";
-import { map, Subject, switchMap } from "rxjs";
+import { map, Subject, switchMap, tap } from "rxjs";
 import { QuestionService } from "src/app/services/question.service";
 import { SubjectService } from "src/app/services/subject.service";
 import { TopicService } from "src/app/services/topic.service";
@@ -25,9 +25,12 @@ export class AddFormComponent extends BaseComponent {
   protected _subjectService = inject(SubjectService);
 
   topicFilter$ = new Subject();
+  topicLoading = false;
   topics$ = this.topicFilter$.pipe(
+    tap(() => (this.topicLoading = true)),
     switchMap((val) => this._topicService.getByFilter(val)),
-    map((res) => res?.content)
+    map((res) => res?.content),
+    tap(() => (this.topicLoading = false))
   );
 
   form = this._fb.group({
@@ -35,12 +38,12 @@ export class AddFormComponent extends BaseComponent {
     questions: this._fb.array([]),
   });
 
-  loadTopicsList(event: DropdownChangeEvent) {
+  loadTopicsList(event: DropdownChangeEvent | null) {
     const filter = {
       size: 500,
       page: 0,
       sort: "title,asc",
-      subjectId: event.value,
+      subjectId: event?.value,
     };
     this.topicFilter$.next(filter);
   }

@@ -5,8 +5,10 @@
         <p-dropdown
           [options]="_subjectService.data()?.content"
           (onChange)="loadTopicsList($event)"
+          (onClear)="loadTopicsList(null)"
           optionLabel="title"
           optionValue="id"
+          [autofocus]="false"
         />
         <label for="dropdown">Fan</label>
       </span>
@@ -14,7 +16,13 @@
 
     <div class="col-12 md:col-6">
       <span class="p-float-label p-fluid">
-        <p-dropdown [options]="topics$ | async" formControlName="topicId" optionLabel="title" optionValue="id" />
+        <p-dropdown
+          [options]="topics$ | async"
+          formControlName="topicId"
+          [loading]="topicLoading"
+          optionLabel="title"
+          optionValue="id"
+        />
         <label for="dropdown">Mavzu</label>
       </span>
     </div>
