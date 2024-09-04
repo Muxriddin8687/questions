@@ -1,18 +1,24 @@
 <form [formGroup]="form" (ngSubmit)="submit()" autocomplete="nope">
   <span class="p-float-label p-fluid">
-    <input formControlName="fullName" id="float-input" type="text" pInputText />
-    <label for="float-input">F.I.Sh</label>
+    <input formControlName="fullName" id="fullName" type="text" pInputText />
+    <label for="fullName">F.I.Sh</label>
   </span>
 
   <span class="p-float-label p-fluid">
-    <input formControlName="username" autocomplete="new-username" id="float-input" type="text" pInputText />
-    <label for="float-input">Login</label>
+    <input formControlName="username" autocomplete="new-username" id="username" type="text" pInputText />
+    <label for="username">Login</label>
   </span>
 
   @if (!isEdit) {
     <span class="p-float-label p-fluid">
-      <p-password formControlName="password" autocomplete="new-password" [toggleMask]="true" [feedback]="false" />
-      <label for="float-input">Parol</label>
+      <p-password
+        formControlName="password"
+        id="password"
+        autocomplete="new-password"
+        [toggleMask]="true"
+        [feedback]="false"
+      />
+      <label for="password">Parol</label>
     </span>
 
     <span class="p-float-label p-fluid">
@@ -21,24 +27,20 @@
         autocomplete="confirm-password"
         [toggleMask]="true"
         [feedback]="false"
+        id="confirm-password"
       />
-      <label for="float-input">Parolni takrorlang</label>
+      <label for="confirm-password">Parolni takrorlang</label>
     </span>
   }
 
   <span class="p-float-label p-fluid">
-    <p-inputMask
-      formControlName="contact"
-      id="float-input"
-      mask="+999(99) 999-99-99"
-      placeholder="+999(99) 999-99-99"
-    />
-    <label for="float-input">Telefon</label>
+    <p-inputMask formControlName="contact" id="contact" mask="+999(99) 999-99-99" placeholder="+999(99) 999-99-99" />
+    <label for="contact">Telefon</label>
   </span>
 
   <span class="p-float-label p-fluid">
-    <input formControlName="email" id="float-input" type="text" pInputText />
-    <label for="float-input">Email</label>
+    <input formControlName="email" id="email" type="text" pInputText />
+    <label for="email">Email</label>
   </span>
 
   <div class="form-footer">

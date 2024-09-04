@@ -8,8 +8,8 @@
 <!-- filter form -->
 <form [formGroup]="filterForm" class="flex gap-2">
   <span class="p-float-label mt-2 mb-4" style="min-width: 150px">
-    <input id="float-input" formControlName="search" type="text" pInputText />
-    <label for="float-input">Qidirish</label>
+    <input id="search" formControlName="search" type="text" pInputText />
+    <label for="search">Qidirish</label>
   </span>
   <span class="p-float-label mt-2 mb-4" style="min-width: 150px">
     <p-dropdown
@@ -33,9 +33,7 @@
     <tr>
       <th width="60px">№</th>
       <th pSortableColumn="title">Nomi<p-sortIcon field="title" /></th>
-      <th pSortableColumn="subject.title">
-        Fan<p-sortIcon field="subjectId" />
-      </th>
+      <th pSortableColumn="subject.title">Fan<p-sortIcon field="subjectId" /></th>
       <th>Izoh</th>
       <th width="110px"></th>
     </tr>

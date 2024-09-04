@@ -35,8 +35,8 @@
           <div class="flex align-items-center justify-content-center">
             <span>{{ i + 1 }}.&nbsp;</span>
             <span class="p-float-label p-fluid w-full m-0">
-              <input formControlName="value" id="float-input" type="text" pInputText />
-              <label for="float-input">Savol</label>
+              <input formControlName="value" id="value-{{ i }}" type="text" pInputText />
+              <label for="value-{{ i }}">Savol</label>
             </span>
           </div>
         </div>
@@ -44,8 +44,8 @@
         <div class="col-12 md:col-6">
           <div class="flex align-items-center justify-content-center">
             <span class="p-float-label p-fluid m-0 w-full">
-              <input formControlName="description" id="float-input" type="text" pInputText />
-              <label for="float-input">Izoh</label>
+              <input formControlName="description" id="description-{{ i }}" type="text" pInputText />
+              <label for="description-{{ i }}">Izoh</label>
             </span>
 
             <button
@@ -75,8 +75,8 @@
 
               <div class="col-12 md:col-6">
                 <span class="p-float-label p-fluid m-0">
-                  <input formControlName="description" id="float-input" type="text" pInputText />
-                  <label for="float-input">Izoh</label>
+                  <input formControlName="description" id="description" type="text" pInputText />
+                  <label for="description">Izoh</label>
                 </span>
               </div>
             </div>

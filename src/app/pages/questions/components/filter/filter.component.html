@@ -1,7 +1,7 @@
 <form [formGroup]="filterForm" class="flex flex-wrap gap-2">
   <span class="p-float-label mt-2 mb-4" style="min-width: 150px">
-    <input id="float-input" formControlName="search" type="text" pInputText />
-    <label for="float-input">Qidirish</label>
+    <input id="search" formControlName="search" type="text" pInputText />
+    <label for="search">Qidirish</label>
   </span>
   <span class="p-float-label mt-2 mb-4">
     <p-multiSelect
@@ -31,8 +31,8 @@
     <label for="dropdown">Mavzu</label>
   </span>
   <span class="p-float-label mt-2 mb-4" style="min-width: 100px">
-    <input id="float-input" formControlName="size" type="text" pInputText />
-    <label for="float-input">Soni</label>
+    <input id="size" formControlName="size" type="text" pInputText />
+    <label for="size">Soni</label>
   </span>
   <button pButton label="Filter" class="mt-2 mb-4" (click)="filter()"></button>
 </form>
