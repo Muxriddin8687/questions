@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { TooltipModule } from "primeng/tooltip";
-import { IQuestion } from "src/app/models/question.model";
+import { IQuestion } from "@models/question.model";
 
 @Component({
   selector: "app-question",

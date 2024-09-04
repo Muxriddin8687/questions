@@ -7,9 +7,9 @@ import { DropdownChangeEvent } from "primeng/dropdown";
 import { InputTextModule } from "primeng/inputtext";
 import { MultiSelectModule } from "primeng/multiselect";
 import { map, Subject, switchMap, tap } from "rxjs";
-import { QuestionService } from "src/app/services/question.service";
-import { SubjectService } from "src/app/services/subject.service";
-import { TopicService } from "src/app/services/topic.service";
+import { QuestionService } from "@services/question.service";
+import { SubjectService } from "@services/subject.service";
+import { TopicService } from "@services/topic.service";
 
 @Component({
   selector: "app-filter",

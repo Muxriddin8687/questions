@@ -6,8 +6,8 @@ import { ButtonModule } from "primeng/button";
 import { DropdownModule } from "primeng/dropdown";
 import { InputTextModule } from "primeng/inputtext";
 import { InputTextareaModule } from "primeng/inputtextarea";
-import { SubjectService } from "src/app/services/subject.service";
-import { TopicService } from "src/app/services/topic.service";
+import { SubjectService } from "@services/subject.service";
+import { TopicService } from "@services/topic.service";
 
 @UntilDestroy()
 @Component({

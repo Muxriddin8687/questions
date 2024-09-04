@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { DefaultService } from "@core/services/default.service";
-import { ITopic } from "../models/topic.model";
+import { ITopic } from "@models/topic.model";
 
 @Injectable({
   providedIn: "root",

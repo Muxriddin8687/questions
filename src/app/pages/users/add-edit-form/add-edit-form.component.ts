@@ -6,7 +6,7 @@ import { ButtonModule } from "primeng/button";
 import { InputMaskModule } from "primeng/inputmask";
 import { InputTextModule } from "primeng/inputtext";
 import { PasswordModule } from "primeng/password";
-import { UserService } from "src/app/services/user.service";
+import { UserService } from "@services/user.service";
 
 @UntilDestroy()
 @Component({

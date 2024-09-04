@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, OnInit } from "@a
 import { BaseComponent } from "@core/components/base.component";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { ButtonModule } from "primeng/button";
-import { QuestionService } from "src/app/services/question.service";
+import { QuestionService } from "@services/question.service";
 import { JsonPipe } from "@angular/common";
 import { AddFormComponent } from "./components/add-form/add-form.component";
 import { FilterComponent } from "./components/filter/filter.component";

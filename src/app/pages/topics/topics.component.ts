@@ -3,12 +3,12 @@ import { BaseComponent } from "@core/components/base.component";
 import { ButtonModule } from "primeng/button";
 import { TableModule } from "primeng/table";
 import { AddEditFormComponent } from "./add-edit-form/add-edit-form.component";
-import { TopicService } from "src/app/services/topic.service";
+import { TopicService } from "@services/topic.service";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { ReactiveFormsModule } from "@angular/forms";
 import { InputTextModule } from "primeng/inputtext";
 import { DropdownModule } from "primeng/dropdown";
-import { SubjectService } from "src/app/services/subject.service";
+import { SubjectService } from "@services/subject.service";
 import { debounceTime, distinctUntilChanged, switchMap, tap } from "rxjs";
 
 @UntilDestroy()

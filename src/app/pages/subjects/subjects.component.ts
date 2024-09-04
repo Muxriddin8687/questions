@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, OnInit } from "@angular/cor
 import { BaseComponent } from "@core/components/base.component";
 import { ButtonModule } from "primeng/button";
 import { AddEditFormComponent } from "./add-edit-form/add-edit-form.component";
-import { SubjectService } from "src/app/services/subject.service";
+import { SubjectService } from "@services/subject.service";
 import { TableModule } from "primeng/table";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 

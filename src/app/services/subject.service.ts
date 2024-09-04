@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { DefaultService } from "@core/services/default.service";
-import { ISubject } from "../models/subject.model";
+import { ISubject } from "@models/subject.model";
 
 @Injectable({
   providedIn: "root",

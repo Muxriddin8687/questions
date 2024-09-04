@@ -4,7 +4,7 @@ import { ButtonModule } from "primeng/button";
 import { AddEditFormComponent } from "./add-edit-form/add-edit-form.component";
 import { TableModule } from "primeng/table";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
-import { UserService } from "src/app/services/user.service";
+import { UserService } from "@services/user.service";
 import { tap } from "rxjs";
 
 @UntilDestroy()

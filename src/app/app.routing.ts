@@ -1,13 +1,13 @@
 import { Routes } from "@angular/router";
-import { pagesRoutes } from "./demo/components/pages/pages.routing";
-import { uikitRoutes } from "./demo/components/uikit/uikit.routing";
 import { authRoutes } from "@pages/auth/auth.routing";
 import { authGuard } from "@core/guards/auth.guard";
 
 export const appRoutes: Routes = [
+  ...authRoutes,
+  { path: "**", redirectTo: "pages/notfound" },
   {
     path: "",
-    loadComponent: () => import("./layout/app.layout.component").then((c) => c.AppLayoutComponent),
+    loadComponent: () => import("./layout/layout.component").then((c) => c.LayoutComponent),
     children: [
       {
         path: "subjects",
@@ -29,42 +29,6 @@ export const appRoutes: Routes = [
         canActivate: [authGuard],
         loadComponent: () => import("./pages/users/users.component").then((c) => c.UsersComponent),
       },
-      {
-        path: "",
-        loadComponent: () =>
-          import("./demo/components/dashboard/dashboard.component").then((c) => c.DashboardComponent),
-      },
-      {
-        path: "mydashboard",
-        loadComponent: () =>
-          import("./demo/components/mydashboard/mydashboard.component").then((c) => c.MyDashboardComponent),
-      },
-      {
-        path: "blocks",
-        loadComponent: () =>
-          import("./demo/components/primeblocks/blocks/blocks.component").then((c) => c.BlocksComponent),
-      },
-      {
-        path: "utilities",
-        loadComponent: () => import("./demo/components/utilities/icons/icons.component").then((c) => c.IconsComponent),
-      },
-      {
-        path: "documentation",
-        loadComponent: () =>
-          import("./demo/components/documentation/documentation.component").then((c) => c.DocumentationComponent),
-      },
-      ...pagesRoutes,
-      ...uikitRoutes,
     ],
   },
-  ...authRoutes,
-  {
-    path: "landing",
-    loadComponent: () => import("./demo/components/landing/landing.component").then((c) => c.LandingComponent),
-  },
-  {
-    path: "pages/notfound",
-    loadComponent: () => import("./demo/components/notfound/notfound.component").then((c) => c.NotfoundComponent),
-  },
-  { path: "**", redirectTo: "pages/notfound" },
 ];

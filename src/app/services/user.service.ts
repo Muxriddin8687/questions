@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { DefaultService } from "@core/services/default.service";
-import { IUser } from "../models/user.model";
+import { IUser } from "@models/user.model";
 import { take, tap } from "rxjs";
 
 @Injectable({
