@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    container_name: questions-box-front
+    ports:
+      - "8085:80"
+    volumes:
+      - ../data:/data
+      - ../logs:/logs
+
+volumes:
+  data:
+  logs:
