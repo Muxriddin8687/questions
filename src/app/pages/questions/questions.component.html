@@ -8,9 +8,8 @@
 <!-- filter form -->
 <app-filter (onFilter)="onFilter($event)" />
 
-{{ data().content | json }}
-@for (item of data().content; track item.id) {
-  <app-question [data]="item" [editable]="true" />
+@for (item of data().content; track item.id; let i = $index) {
+  <app-question [data]="item" [index]="i" [editable]="true" />
 } @empty {
   <p class="text-center">Savol topilmadi</p>
 }

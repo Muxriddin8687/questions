@@ -1,9 +1,9 @@
 <div class="question-block">
   <div class="question">
     <p class="question-text">
-      {{ data?.value }}
+      {{ +index + 1 }}. {{ data?.value }}
       @if (data?.description) {
-        <i class="pi pi-info-circle" [pTooltip]="data?.description" tooltipPosition="bottom"></i>
+        <i class="pi pi-info-circle text-cyan-600 ml-2" [pTooltip]="data?.description" tooltipPosition="bottom"></i>
       }
     </p>
   </div>
@@ -12,26 +12,14 @@
     @for (answer of data?.answers; track answer; let i = $index) {
       <div class="answer">
         <p class="answer-text">
-          <span [class]="answer?.isCorrect ? 'border-primary-500' : ''">
-            @switch (i) {
-              @case (0) {
-                A
-              }
-              @case (1) {
-                B
-              }
-              @case (2) {
-                C
-              }
-              @case (3) {
-                D
-              }
-            }
-            )&nbsp;
-          </span>
+          <span [class]="answer?.isCorrect ? 'text-orange-500' : ''">{{ answers[i] }}&#41;&nbsp;</span>
           <span class="answer-value">{{ answer.value }}</span>
           @if (answer?.description) {
-            <i class="pi pi-info-circle" [pTooltip]="answer?.description" tooltipPosition="bottom"></i>
+            <i
+              class="pi pi-info-circle text-cyan-600 ml-2"
+              [pTooltip]="answer?.description"
+              tooltipPosition="bottom"
+            ></i>
           }
         </p>
       </div>

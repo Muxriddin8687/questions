@@ -11,5 +11,7 @@ import { IQuestion } from "@models/question.model";
 })
 export class QuestionComponent {
   @Input() data: IQuestion | undefined;
+  @Input() index: number = 0;
   @Input() editable = false;
+  answers: string[] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
 }
