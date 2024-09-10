@@ -1,7 +1,7 @@
 <div class="question-block">
   <div class="question">
     <p class="question-text">
-      {{ +index + 1 }}. {{ data?.value }}
+      {{ index }}. {{ data?.value }}
       @if (data?.description) {
         <i class="pi pi-info-circle text-cyan-600 ml-2" [pTooltip]="data?.description" tooltipPosition="bottom"></i>
       }

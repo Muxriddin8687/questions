@@ -21,9 +21,11 @@ export class QuestionsComponent extends BaseComponent implements OnInit {
   protected _questionService = inject(QuestionService);
   data = computed(() => this._questionService.data());
   filter = { sort: "id,asc", size: 15, page: 0 };
+  start_page = 0;
 
   ngOnInit(): void {
     this.loadData();
+    this.start_page = 3;
   }
 
   loadData() {
@@ -32,12 +34,14 @@ export class QuestionsComponent extends BaseComponent implements OnInit {
   }
 
   onPageChange(event: any) {
+    this.start_page = event.first;
     this.filter = { ...this.filter, page: event.page };
     this.loadData();
   }
 
   onFilter(event: object) {
-    this.filter = { ...this.filter, ...event };
+    this.filter = { ...this.filter, ...event, page: 0 };
+    this.start_page = 0;
     this.loadData();
   }
 
