@@ -1,14 +1,30 @@
 .question-block {
     display: block;
-    border-radius: 3px;
-    margin-bottom: 10px;
-    box-shadow: 0 0 2px 0 var(--gray-500);
+    position: relative;
+    background-color: transparent;
+
+    // border-radius: 3px;
+    // margin-bottom: 10px;
+    // box-shadow: 0 0 2px 0 var(--gray-500);
+    &:hover {
+        background-color: var(--gray-100);
+    }
 
     .question-text {
         display: block;
         font-size: 1.2rem;
         font-weight: 500;
-        padding: 1rem 1rem 0 1rem;
+        padding: 1rem 55px 0 1rem;
+    }
+
+    .actions-block {
+        position: absolute;
+        top: 11px;
+        right: 5px;
+        display: flex;
+        width: fit-content;
+        height: fit-content;
+        align-items: center;
     }
 
     .answers {

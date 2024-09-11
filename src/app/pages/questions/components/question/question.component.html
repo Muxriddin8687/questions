@@ -5,32 +5,30 @@
       @if (data?.description) {
         <i class="pi pi-info-circle text-cyan-600 ml-2" [pTooltip]="data?.description" tooltipPosition="bottom"></i>
       }
-      <div class="mr-auto inline">
-        <button
-          pButton
-          pRipple
-          type="button"
-          [text]="true"
-          [rounded]="true"
-          size="small"
-          severity="warning"
-          icon="pi pi-pencil"
-          (click)="update(data?.id || 0)"
-          class="mr-2 h-auto w-auto"
-        ></button>
-        <button
-          pButton
-          pRipple
-          type="button"
-          icon="pi pi-times"
-          [text]="true"
-          size="small"
-          [rounded]="true"
-          severity="danger"
-          class="h-auto w-auto"
-          (click)="deleteDialog($event, data?.id || 0)"
-        ></button>
-      </div>
+    </div>
+    <div class="actions-block">
+      <button
+        pButton
+        pRipple
+        type="button"
+        [text]="true"
+        size="small"
+        severity="warning"
+        icon="pi pi-pencil"
+        (click)="update(data?.id || 0)"
+        class="mr-3 p-1 h-auto w-auto"
+      ></button>
+      <button
+        pButton
+        pRipple
+        type="button"
+        icon="pi pi-trash"
+        [text]="true"
+        size="small"
+        severity="danger"
+        class="p-1 h-auto w-auto"
+        (click)="deleteDialog($event, data?.id || 0)"
+      ></button>
     </div>
   </div>
 

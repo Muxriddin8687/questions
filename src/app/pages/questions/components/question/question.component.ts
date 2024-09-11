@@ -2,11 +2,12 @@ import { Component, inject, Input } from "@angular/core";
 import { TooltipModule } from "primeng/tooltip";
 import { IQuestion } from "@models/question.model";
 import { BaseComponent } from "@core/components/base.component";
-import { untilDestroyed } from "@ngneat/until-destroy";
+import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { EditFormComponent } from "../edit-form/edit-form.component";
 import { QuestionService } from "@services/question.service";
 import { ButtonModule } from "primeng/button";
 
+@UntilDestroy()
 @Component({
   selector: "app-question",
   standalone: true,
