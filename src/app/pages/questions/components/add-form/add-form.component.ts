@@ -1,5 +1,5 @@
 import { AsyncPipe } from "@angular/common";
-import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject, OnInit } from "@angular/core";
 import { FormArray, ReactiveFormsModule, Validators } from "@angular/forms";
 import { BaseComponent } from "@core/components/base.component";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
@@ -10,6 +10,7 @@ import { map, Subject, switchMap, tap } from "rxjs";
 import { QuestionService } from "@services/question.service";
 import { SubjectService } from "@services/subject.service";
 import { TopicService } from "@services/topic.service";
+import { RadioButtonModule } from "primeng/radiobutton";
 
 @UntilDestroy()
 @Component({
@@ -17,9 +18,9 @@ import { TopicService } from "@services/topic.service";
   templateUrl: "./add-form.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [ButtonModule, ReactiveFormsModule, InputTextModule, DropdownModule, AsyncPipe],
+  imports: [ButtonModule, ReactiveFormsModule, InputTextModule, DropdownModule, AsyncPipe, RadioButtonModule],
 })
-export class AddFormComponent extends BaseComponent {
+export class AddFormComponent extends BaseComponent implements OnInit {
   private _topicService = inject(TopicService);
   private _questionService = inject(QuestionService);
   protected _subjectService = inject(SubjectService);
@@ -33,10 +34,16 @@ export class AddFormComponent extends BaseComponent {
     tap(() => (this.topicLoading = false))
   );
 
+  answers: string[] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
   form = this._fb.group({
+    subjectId: [null, Validators.required],
     topicId: [null, Validators.required],
     questions: this._fb.array([]),
   });
+
+  ngOnInit() {
+    this.addQuestion();
+  }
 
   loadTopicsList(event: DropdownChangeEvent | null) {
     const filter = {
@@ -102,5 +109,12 @@ export class AddFormComponent extends BaseComponent {
       isCorrect: [isCorrectValue],
       description: [null],
     });
+  }
+
+  onChange($event: any, i: number, j: number) {
+    if ($event) {
+      this.getAnswers(i).controls.forEach((control) => control.get("isCorrect")?.patchValue(false));
+      this.getAnswers(i).controls[j].get("isCorrect")?.setValue(true);
+    }
   }
 }

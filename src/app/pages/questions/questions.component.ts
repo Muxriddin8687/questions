@@ -20,7 +20,7 @@ export class QuestionsComponent implements OnInit {
   protected _questionService = inject(QuestionService);
   private _modalService = inject(DialogService);
   data = computed(() => this._questionService.data());
-  filter = { sort: "id,asc", size: 15, page: 0 };
+  filter = { sort: "id,asc", size: 10, page: 0 };
   start_page = 0;
 
   ngOnInit(): void {
@@ -34,7 +34,7 @@ export class QuestionsComponent implements OnInit {
 
   onPageChange(event: any) {
     this.start_page = event.first;
-    this.filter = { ...this.filter, page: event.page };
+    this.filter = { ...this.filter, page: event.page, size: event.rows };
     this.loadData();
   }
 

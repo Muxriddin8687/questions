@@ -5,11 +5,12 @@ import { BaseComponent } from "@core/components/base.component";
 import { untilDestroyed } from "@ngneat/until-destroy";
 import { EditFormComponent } from "../edit-form/edit-form.component";
 import { QuestionService } from "@services/question.service";
+import { ButtonModule } from "primeng/button";
 
 @Component({
   selector: "app-question",
   standalone: true,
-  imports: [TooltipModule],
+  imports: [TooltipModule, ButtonModule],
   templateUrl: "./question.component.html",
   styleUrl: "./question.component.scss",
 })

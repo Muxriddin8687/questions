@@ -1,11 +1,37 @@
 <div class="question-block">
   <div class="question">
-    <p class="question-text">
+    <div class="question-text">
       {{ index }}. {{ data?.value }}
       @if (data?.description) {
         <i class="pi pi-info-circle text-cyan-600 ml-2" [pTooltip]="data?.description" tooltipPosition="bottom"></i>
       }
-    </p>
+      <div class="mr-auto inline">
+        <button
+          pButton
+          pRipple
+          type="button"
+          [text]="true"
+          [rounded]="true"
+          size="small"
+          severity="warning"
+          icon="pi pi-pencil"
+          (click)="update(data?.id || 0)"
+          class="mr-2 h-auto w-auto"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-times"
+          [text]="true"
+          size="small"
+          [rounded]="true"
+          severity="danger"
+          class="h-auto w-auto"
+          (click)="deleteDialog($event, data?.id || 0)"
+        ></button>
+      </div>
+    </div>
   </div>
 
   <div class="answers">

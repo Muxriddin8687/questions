@@ -4,6 +4,7 @@ export interface IQuestions {
 }
 
 export interface IQuestion {
+  id?: number;
   value: string;
   description?: string;
   answers: IAnswer[];
