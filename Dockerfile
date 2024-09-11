@@ -1,10 +1,12 @@
-FROM node:20.2.0-alpine AS build-stage
+FROM node:20 AS build
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
-COPY ./ .
-RUN npm run build
-FROM nginx:stable-alpine AS production-stage
-RUN mkdir /app
-COPY --from=build-stage /app/dist /app
+RUN npm install --force
+COPY . .
+ARG deploy
+RUN npm run $deploy
+
+FROM nginx:1.25.3-alpine
 COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /app/dist/sakai-ng /usr/share/nginx/html
+EXPOSE 80

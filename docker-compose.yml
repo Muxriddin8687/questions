@@ -1,18 +1,17 @@
 version: '3.8'
 
 services:
-  server:
+  build:
+    container_name: questions-box-front
     build:
       context: .
-      dockerfile: Dockerfile
+      args:
+        - deploy=build
     restart: always
-    container_name: questions-box-front
+    environment:
+      TZ: "Asia/Tashkent"
     ports:
       - "8085:80"
     volumes:
       - ../data:/data
       - ../logs:/logs
-
-volumes:
-  data:
-  logs:
