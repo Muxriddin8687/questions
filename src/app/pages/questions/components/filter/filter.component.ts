@@ -6,7 +6,7 @@ import { ButtonDirective } from "primeng/button";
 import { DropdownChangeEvent } from "primeng/dropdown";
 import { InputTextModule } from "primeng/inputtext";
 import { MultiSelectModule } from "primeng/multiselect";
-import { map, Subject, switchMap, tap } from "rxjs";
+import { catchError, distinct, distinctUntilChanged, map, of, Subject, switchMap, tap } from "rxjs";
 import { QuestionService } from "@services/question.service";
 import { SubjectService } from "@services/subject.service";
 import { TopicService } from "@services/topic.service";
@@ -26,16 +26,17 @@ export class FilterComponent extends BaseComponent {
   topicFilter$ = new Subject();
   topicLoading = false;
   topics$ = this.topicFilter$.pipe(
+    distinctUntilChanged(),
     tap(() => (this.topicLoading = true)),
     switchMap((val) => this._topicService.getByFilter(val)),
-    map((res) => res?.content),
+    catchError(() => of([])),
+    map((res) => res?.content || []),
     tap(() => (this.topicLoading = false))
   );
   filterForm = this._fb.group({
     search: [null],
     subjectIds: [null],
     topicIds: [null],
-    size: [15],
   });
 
   filter() {
@@ -47,7 +48,7 @@ export class FilterComponent extends BaseComponent {
       size: 500,
       page: 0,
       sort: "title,asc",
-      ubjectIds: event?.value,
+      subjectIds: event?.value || null,
     };
 
     this.topicFilter$.next(filter);

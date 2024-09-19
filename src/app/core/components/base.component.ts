@@ -24,7 +24,7 @@ export class BaseComponent {
     this._ref.close();
   }
 
-  delete(id: number) {}
+  delete(id: number) { }
 
   deleteDialog(event: Event, id: number) {
     this.confirmationService.confirm({
@@ -32,14 +32,14 @@ export class BaseComponent {
       message: "Haqiqatan ham tanlangan ma'lumotni o'chirmoqchimisiz?",
       header: "O'chirish",
       icon: "pi pi-info-circle",
-      acceptButtonStyleClass: "p-button-danger p-button-text",
-      rejectButtonStyleClass: "p-button-text p-button-text",
+      acceptButtonStyleClass: "p-button-text",
+      rejectButtonStyleClass: "p-button-danger p-button-text",
       acceptIcon: "none",
-      rejectIcon: "none",
-      acceptLabel: "Ha",
-      rejectLabel: "Yo'q",
-      accept: () => this.delete(id),
-      reject: () => {},
+      rejectIcon: "pi pi-trash",
+      acceptLabel: "Yo'q",
+      rejectLabel: "Ha",
+      accept: () => { },
+      reject: () => this.delete(id),
     });
   }
 
